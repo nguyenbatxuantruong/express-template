@@ -3,9 +3,7 @@ const logger = require("../utils/logger");
 
 const stream = {
   write: (message) => { 
-    console.log('Truong', message)
-    // logger.info(message);
-    // logger.error(message);
+    logger.info(message);
   }
 };
 const skip = () => {
@@ -14,8 +12,7 @@ const skip = () => {
 };
 
 const morganMiddleware = morgan(
-  'tiny',
-  // ':remote-addr :method :url :status :res[content-length] - :response-time ms',
+  ':remote-addr :method :url :status :res[content-length] - :response-time ms',
   {
     stream,
     skip
