@@ -3,7 +3,9 @@ const logReqRes = (req, res, next) => {
   const oldEnd = res.end;
 
   const chunks = [];
-
+  console.log({
+    time: new Date(),
+  })
   res.write = (...restArgs) => {
     chunks.push(Buffer.from(restArgs[0]));
     oldWrite.apply(res, restArgs);
@@ -16,7 +18,7 @@ const logReqRes = (req, res, next) => {
     const body = Buffer.concat(chunks).toString('utf8');
 
     console.log({
-      time: new Date().toUTCString(),
+      time: new Date(),
       fromIP: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
       method: req.method,
       originalUri: req.originalUrl,
